@@ -5,28 +5,28 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '16'
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '11'
           distribution: 'temurin'
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
       - name: Install Cordova
-        run: npm install -g cordova@12
+        run: npm install -g cordova@11
       - name: Create Cordova project
         run: cordova create tempapp com.thelastgame.app "The Last Game"
       - name: Add Android platform
         working-directory: tempapp
-        run: cordova platform add android@12
+        run: cordova platform add android@10
       - name: Copy www files
         run: cp -r www/* tempapp/www/
       - name: Build APK
